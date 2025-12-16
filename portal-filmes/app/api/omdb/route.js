@@ -1,5 +1,3 @@
-import fetch from 'node-fetch';
-
 export async function GET(request) {
   const { searchParams } = new URL(request.url);
   const q = searchParams.get('search') || '';
