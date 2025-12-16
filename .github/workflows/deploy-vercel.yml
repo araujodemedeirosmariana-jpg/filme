@@ -20,11 +20,9 @@ jobs:
           node-version: '20'
 
       - name: Install dependencies
-        working-directory: portal-filmes
         run: npm ci
 
       - name: Build
-        working-directory: portal-filmes
         run: npm run build
 
       - name: Deploy to Vercel
@@ -33,7 +31,7 @@ jobs:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
-          working-directory: portal-filmes
+          working-directory: .
           vercel-args: '--prod'
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
