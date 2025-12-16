@@ -19,13 +19,37 @@ jobs:
         with:
           node-version: '20'
 
+      - name: Check project exists
+        id: check_project
+        run: |
+          if [ -d portal-filmes ] || [ -f package.json ]; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Install dependencies
-        run: npm ci
+        if: steps.check_project.outputs.exists == 'true'
+        run: |
+          if [ -f portal-filmes/package.json ]; then
+            cd portal-filmes
+          fi
+          if [ -f package-lock.json ] || [ -f portal-filmes/package-lock.json ]; then
+            npm ci
+          else
+            npm install
+          fi
 
       - name: Build
-        run: npm run build
+        if: steps.check_project.outputs.exists == 'true'
+        run: |
+          if [ -f portal-filmes/package.json ]; then
+            cd portal-filmes
+          fi
+          npm run build
 
       - name: Deploy to Vercel
+        if: steps.check_project.outputs.exists == 'true'
         uses: amondnet/vercel-action@v20
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
