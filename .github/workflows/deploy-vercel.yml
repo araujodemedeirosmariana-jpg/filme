@@ -63,4 +63,4 @@ jobs:
           # Install vercel CLI and deploy (token must be set in repo secrets)
           npm install -g vercel@latest
           # deploy: use scope/org and prod flag; avoid unsupported --project flag
-          vercel --token "$VERCEL_TOKEN" --prod --confirm --scope "$VERCEL_ORG_ID"
+          vercel --token "$VERCEL_TOKEN" --prod --yes --scope "$VERCEL_ORG_ID"
