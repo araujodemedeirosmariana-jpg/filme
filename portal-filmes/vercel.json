@@ -1,0 +1,6 @@
+{
+  "root": "portal-filmes",
+  "buildCommand": "npm run build",
+  "outputDirectory": ".next",
+  "framework": "nextjs"
+}
