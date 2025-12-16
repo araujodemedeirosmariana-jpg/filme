@@ -1,0 +1,18 @@
+name: Test OMDb Secret
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test-omdb:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Test OMDb API using repo secret
+        env:
+          OMDB_KEY: ${{ secrets.OMDB_API_KEY }}
+        run: |
+          echo "Testing OMDb with secret (response will be shown below)"
+          curl -sS "https://www.omdbapi.com/?apikey=${OMDB_KEY}&s=matrix" | jq . || true
