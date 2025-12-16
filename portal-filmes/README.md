@@ -17,6 +17,28 @@ Variáveis de ambiente para deploy no Vercel:
 
 Server-side OMDB proxy: set `OMDB_API_KEY` (server secret) to allow secure searches via `/api/omdb`.
 
+## Exemplo de resposta OMDb (fixture)
+
+Há uma fixture de teste em `test/fixtures/omdb-matrix.json` com um exemplo de resposta para a busca `matrix`:
+
+```json
+{
+  "Search": [
+    {"Title": "The Matrix", "Year": "1999", "imdbID": "tt0133093", "Type": "movie", "Poster": "https://..."}
+  ],
+  "totalResults": "156",
+  "Response": "True"
+}
+```
+
+Você pode testar a API de produção com:
+
+```bash
+curl 'https://filme1.vercel.app/api/omdb?search=matrix'
+```
+
+A fixture serve para testes locais e para documentação.
+
 To set secrets using the GitHub CLI:
 
 ```bash
